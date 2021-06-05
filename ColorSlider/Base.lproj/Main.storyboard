@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -116,9 +116,9 @@
                     <connections>
                         <outlet property="blueSlider" destination="pKy-3b-52O" id="Rqh-FF-xtS"/>
                         <outlet property="blueValue" destination="s1r-dR-sVF" id="fT7-wL-yWm"/>
+                        <outlet property="colorView" destination="2c6-w7-7Nr" id="O6H-Xw-tPA"/>
                         <outlet property="greenSlider" destination="Dl2-i0-H1h" id="RSo-Lq-40H"/>
                         <outlet property="greenValue" destination="WKa-AH-ztT" id="F3v-NO-q1E"/>
-                        <outlet property="mainColorView" destination="2c6-w7-7Nr" id="O6H-Xw-tPA"/>
                         <outlet property="redSlider" destination="B6m-W9-BgK" id="SYr-uw-uLs"/>
                         <outlet property="redValue" destination="jiJ-is-zsa" id="TA4-Lp-OsQ"/>
                     </connections>
