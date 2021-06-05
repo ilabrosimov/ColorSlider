@@ -39,6 +39,8 @@ class ViewController: UIViewController {
         
         colorView.backgroundColor = UIColor.init(red: redColor, green: greenColor, blue: blueColor, alpha: 1)
     }
+    @IBAction func donePressed(_ sender: UIButton) {
+    }
     
     private  func startUI () {
         colorView.layer.cornerRadius = 15
