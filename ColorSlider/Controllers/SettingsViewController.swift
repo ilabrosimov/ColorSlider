@@ -9,14 +9,10 @@ import UIKit
 
 protocol SettingViewControllerDelegate {
     func updateViewColor(with color: UIColor)
-    func prefferedColor () -> CGColor
+    func prefferedColor () -> UIColor
 }
 
 class SettingsViewController: UIViewController, UITextFieldDelegate {
-    
-    
-    
-    
     //MARK: - IB Outlets
     @IBOutlet weak var colorView: UIView!
     
@@ -24,7 +20,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
     
-    @IBOutlet weak var redValue: UILabel!
+    @IBOutlet weak var redValue: UILabel! 
     @IBOutlet weak var greenValue: UILabel!
     @IBOutlet weak var blueValue: UILabel!
     
@@ -38,36 +34,24 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         startUI()
-        redTextFiled.delegate = self
-        greenTextFiled.delegate = self
-        blueTextFiled.delegate = self
-        
-        redTextFiled.enablesReturnKeyAutomatically = true
-        
-        guard let prefferedColor = delegate?.prefferedColor() else {
-            print("Не получил отбратно")
-            return
-        }
-        print ("PrefferedColor: \(prefferedColor)")
-        colorView.backgroundColor? = UIColor(cgColor: prefferedColor)
+        delegateTextFields()
+        colorView.backgroundColor = delegate?.prefferedColor() ?? UIColor.white
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     //MARK: - IB Actions
     @IBAction func valueChanged(_ sender: UISlider) {
-        updateUI(with: getSliderColor())
-        
+        updateUI()
     }
     
     @IBAction func donePressed(_ sender: UIButton) {
-        
-        
-        
-        delegate?.updateViewColor(with: getSliderColor())
+        delegate?.updateViewColor(with: getSliderColor() )
         dismiss(animated: true, completion: nil)
     }
-    override func viewWillAppear(_ animated: Bool) {
-       // delegate = HomeViewController()
-    }
+    
     //MARK: - Private Methods
     private func getSliderColor () -> UIColor {
         let redColor = CGFloat(redSlider.value)
@@ -75,13 +59,16 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         let blueColor = CGFloat (blueSlider.value)
         return UIColor.init(red: redColor, green: greenColor, blue: blueColor, alpha: 1)
     }
-    private func updateUI (with viewColor: UIColor) {
+    private func updateUI () {
+        
         redValue.text = String(NSString(format: "%.2f", redSlider.value ))
         greenValue.text = String(NSString(format: "%.2f", greenSlider.value))
         blueValue.text = String(NSString(format: "%.2f", blueSlider.value))
-        redTextFiled.text = redValue.text
-        greenTextFiled.text = greenValue.text
-        blueTextFiled.text = blueValue.text
+        
+        redTextFiled.text = String(NSString(format: "%.2f", redSlider.value ))
+        greenTextFiled.text = String(NSString(format: "%.2f", greenSlider.value))
+        blueTextFiled.text = String(NSString(format: "%.2f", blueSlider.value))
+        
         colorView.backgroundColor = getSliderColor()
         
     }
@@ -93,31 +80,27 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         greenSlider.value = 0
         blueSlider.value = 0
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        redValue.text = redTextFiled.text
-        greenValue.text = greenTextFiled.text
-        blueValue.text = blueTextFiled.text
-        
-        
-        
+    
         guard let redColor  = redTextFiled.text else {
             return}
         guard let greenColor  = greenTextFiled.text else {
             return}
         guard let blueColor  = blueTextFiled.text else {
             return}
-        let redColorFloat = Float (Double(redColor) ?? 0.00)
-        let greenColorFloat = Float (Double(greenColor) ?? 0.00)
-        let blueColorFloat = Float (Double(blueColor) ?? 0.00)
-        redSlider.value = redColorFloat
-        greenSlider.value = greenColorFloat
-        blueSlider.value = blueColorFloat
-        
-        updateUI(with: getSliderColor())
+      
+        redSlider.value = Float (Double(redColor) ?? 0.00)
+        greenSlider.value = Float (Double(greenColor) ?? 0.00)
+        blueSlider.value = Float (Double(blueColor) ?? 0.00)
+        updateUI()
         
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
+    
+    private func delegateTextFields () {
+        redTextFiled.delegate = self
+        greenTextFiled.delegate = self
+        blueTextFiled.delegate = self
     }
 }
 
