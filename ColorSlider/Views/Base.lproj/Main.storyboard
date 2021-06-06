@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="YD9-x5-EhZ">
             <objects>
-                <viewController id="4Dy-Bi-d3d" sceneMemberID="viewController">
+                <viewController id="4Dy-Bi-d3d" customClass="HomeViewController" customModule="ColorSlider" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oUL-B6-Kus">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,7 +22,7 @@
                     <navigationItem key="navigationItem" id="hdA-1L-7XP">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Ns8-a6-xmc">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="sfv-N4-vGn"/>
+                                <action selector="colorBarButtonTapped:" destination="4Dy-Bi-d3d" id="2nV-iB-969"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -31,10 +31,10 @@
             </objects>
             <point key="canvasLocation" x="-400.00000000000006" y="-93.080357142857139"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ColorSlider" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsVC" id="BYZ-38-t0r" customClass="SettingsViewController" customModule="ColorSlider" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,17 +125,17 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mbz-kx-Zcj">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g5f-2b-lUv">
                                                 <rect key="frame" x="0.0" y="57" width="50" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bTJ-QJ-Prd">
                                                 <rect key="frame" x="0.0" y="114" width="50" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -173,11 +173,14 @@
                     <navigationItem key="navigationItem" id="LDN-dO-lHo"/>
                     <connections>
                         <outlet property="blueSlider" destination="pKy-3b-52O" id="Rqh-FF-xtS"/>
+                        <outlet property="blueTextFiled" destination="bTJ-QJ-Prd" id="QC4-c1-OcF"/>
                         <outlet property="blueValue" destination="s1r-dR-sVF" id="fT7-wL-yWm"/>
                         <outlet property="colorView" destination="2c6-w7-7Nr" id="O6H-Xw-tPA"/>
                         <outlet property="greenSlider" destination="Dl2-i0-H1h" id="RSo-Lq-40H"/>
+                        <outlet property="greenTextFiled" destination="g5f-2b-lUv" id="ffN-fI-2XU"/>
                         <outlet property="greenValue" destination="WKa-AH-ztT" id="F3v-NO-q1E"/>
                         <outlet property="redSlider" destination="B6m-W9-BgK" id="SYr-uw-uLs"/>
+                        <outlet property="redTextFiled" destination="mbz-kx-Zcj" id="aG3-K5-npN"/>
                         <outlet property="redValue" destination="jiJ-is-zsa" id="TA4-Lp-OsQ"/>
                     </connections>
                 </viewController>
