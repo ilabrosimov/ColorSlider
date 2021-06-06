@@ -30,18 +30,14 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     var delegate : SettingViewControllerDelegate?
     
-    //MARK: - Override Methods
+    //MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         startUI()
+        toolBarSetUp()
         delegateTextFields()
         colorView.backgroundColor = delegate?.prefferedColor() ?? UIColor.white
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    
     //MARK: - IB Actions
     @IBAction func valueChanged(_ sender: UISlider) {
         updateUI()
@@ -52,6 +48,21 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    //MARK: - Public Methods
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let redColor  = redTextFiled.text else {return}
+        guard let greenColor  = greenTextFiled.text else {return}
+        guard let blueColor  = blueTextFiled.text else {return}
+      
+        redSlider.value = Float (Double(redColor) ?? 0.00)
+        greenSlider.value = Float (Double(greenColor) ?? 0.00)
+        blueSlider.value = Float (Double(blueColor) ?? 0.00)
+        updateUI()
+    }
     //MARK: - Private Methods
     private func getSliderColor () -> UIColor {
         let redColor = CGFloat(redSlider.value)
@@ -59,8 +70,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         let blueColor = CGFloat (blueSlider.value)
         return UIColor.init(red: redColor, green: greenColor, blue: blueColor, alpha: 1)
     }
+    
     private func updateUI () {
-        
         redValue.text = String(NSString(format: "%.2f", redSlider.value ))
         greenValue.text = String(NSString(format: "%.2f", greenSlider.value))
         blueValue.text = String(NSString(format: "%.2f", blueSlider.value))
@@ -80,28 +91,24 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         greenSlider.value = 0
         blueSlider.value = 0
     }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-    
-        guard let redColor  = redTextFiled.text else {
-            return}
-        guard let greenColor  = greenTextFiled.text else {
-            return}
-        guard let blueColor  = blueTextFiled.text else {
-            return}
-      
-        redSlider.value = Float (Double(redColor) ?? 0.00)
-        greenSlider.value = Float (Double(greenColor) ?? 0.00)
-        blueSlider.value = Float (Double(blueColor) ?? 0.00)
-        updateUI()
-        
-    }
-    
     private func delegateTextFields () {
         redTextFiled.delegate = self
         greenTextFiled.delegate = self
         blueTextFiled.delegate = self
     }
+    private func toolBarSetUp () {
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 50))
+        let flexiableSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done,target: self, action: #selector(endEditing) )
+        toolBar.items = [flexiableSpace,doneBarButton]
+        toolBar.sizeToFit()
+        redTextFiled.inputAccessoryView = toolBar
+        greenTextFiled.inputAccessoryView = toolBar
+        blueTextFiled.inputAccessoryView = toolBar
+    }
+    @objc func endEditing (){
+            view.endEditing(true)
+        }
 }
 
 
